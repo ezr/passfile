@@ -44,3 +44,9 @@ aws_secret_access_key = dWhzYWNvZWh1c2xhcmNvZWh1YXJvZWN1aGxhcmNY
 aws_access_key_id = HVsYXJjb2VodWxhcmNbb
 aws_secret_access_key = dWxhN2QgYXNub3RlaHVzYXRvZXVsOWE4Z2Z1bDc5
 region = us-east-2
+```
+
+To enable bash completion, you can add this to your bashrc:
+```
+complete -W "$(ls $HOME/.password-store/files/  | rev | cut --complement -f 1 -d '.' | rev)" passfile.py
+```
