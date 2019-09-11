@@ -44,9 +44,14 @@ retcode = ps.returncode
 if retcode == 1:
     print("pass returned code 1 - account not found")
     exit(1)
-elif err != None:
+elif (err != None):
     print("pass sent the following to stderr:")
     print(err)
+    exit(2)
+elif retcode != 0:
+    print("pass had exit code %s" % retcode)
+    print("stdout:", output.decode("utf-8").strip("\n"))
+    print("stderr:", err)
     exit(2)
 
 output_lines = output.decode("utf-8").split('\n')
