@@ -9,8 +9,8 @@ $ ls ~/.aws/
 config 
 
 $ ./passfile.py aws-credentials
-successfully wrote to /home/gravel/.aws/credentials
-added an atd job to delete /home/gravel/.aws/credentials in 600 minutes
+successfully wrote to /home/ezr/.aws/credentials
+added an atd job to delete /home/ezr/.aws/credentials in 600 minutes
 
 $ ls ~/.aws
 config  credentials
