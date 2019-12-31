@@ -5,6 +5,7 @@
 # at daemon: http://blog.calhariz.com/tag/at
 
 import argparse
+import base64
 from os import environ as env
 from os.path import isfile
 import subprocess
@@ -53,13 +54,21 @@ output_lines = output.decode("utf-8").split('\n')
 
 # now its time to write the data to a file
 # the first line should be the path the data will be written to
+# the second line will be "binary" for binary files
 dest = get_path(output_lines[0])
 
-with open(dest, "w") as outfile:
-    for line in output_lines[1:-1]:
-        outfile.write(line + "\n")
-    # handle the last line outside of the loop to avoid adding an extra newline
-    outfile.write(output_lines[-1])
+if output_lines[1] == "binary":
+    print("binary decoding")
+    with open(dest, "wb") as outfile:
+        for line in output_lines[2:]:
+            outfile.write(base64.b64decode(line))
+else:
+    print("plain text")
+    with open(dest, "w") as outfile:
+        for line in output_lines[1:-1]:
+            outfile.write(line + "\n")
+        # handle the last line outside of the loop to avoid adding an extra newline
+        outfile.write(output_lines[-1])
 print("successfully wrote to %s" % dest)
 
 # now we add a job to atd to delete the plaintext after a certain amount of time

@@ -32,7 +32,7 @@ region = us-east-2
 - at daemon: http://blog.calhariz.com/tag/at
 
 ## Configuration
-Configure pass as described at https://www.passwordstore.org/. For each file used by passfile, save the data in pass under a 'files' directory. The first line in the file saved by pass should be the path to the file when written on disk. The rest of the file saved by pass should be the contents of the file that will be written. So this is what I get when I run 'pass files/aws-credentials' (the keys shown here are faked):
+Configure pass as described at https://www.passwordstore.org/. For each text file used by passfile, save the data in pass under a 'files' directory. The first line in the file saved by pass should be the path to the file when written on disk. The rest of the file saved by pass should be the contents of the file that will be written. So this is what I get when I run 'pass files/aws-credentials' (the keys shown here are faked):
 ```
 $ pass files/aws-credentials 
 /home/ezr/.aws/credentials
@@ -44,6 +44,14 @@ aws_secret_access_key = dWhzYWNvZWh1c2xhcmNvZWh1YXJvZWN1aGxhcmNY
 aws_access_key_id = HVsYXJjb2VodWxhcmNbb
 aws_secret_access_key = dWxhN2QgYXNub3RlaHVzYXRvZXVsOWE4Z2Z1bDc5
 region = us-east-2
+```
+For binary files, we base64 encode the data saved by pass. The second line in the file is "binary". The tobase64 script outputs the info to save in pass for binary files.
+```
+$ pass files/gcloud-creds  | head
+/home/ezr/.config/gcloud/credentials.db
+binary
+3Rq4HfWLEbVwmGETbaybArkFJKWIUGyO0BiVyKhA++Qxkg8EoidXLT42gfDi0sW9xSjkqiIlmWS3
+6Z+gm7nl6VxkM/nS2Zhf+V7Ntk1KXuhy4jExaonTI7JX0307MFywedRboFMs3M1GlMLr+6WenSig
 ```
 
 To enable bash completion, you can add this to your bashrc:
