@@ -58,12 +58,11 @@ output_lines = output.decode("utf-8").split('\n')
 dest = get_path(output_lines[0])
 
 if output_lines[1] == "binary":
-    print("binary decoding")
+    print("binary mode...")
     with open(dest, "wb") as outfile:
         for line in output_lines[2:]:
             outfile.write(base64.b64decode(line))
 else:
-    print("plain text")
     with open(dest, "w") as outfile:
         for line in output_lines[1:-1]:
             outfile.write(line + "\n")
